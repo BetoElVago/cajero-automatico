@@ -27,7 +27,7 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Component id="principalPanel" alignment="0" max="32767" attributes="0"/>
-          <Component id="menuPanel" alignment="1" pref="440" max="32767" attributes="0"/>
+          <Component id="menuPanel" alignment="1" pref="442" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -35,7 +35,7 @@
           <Group type="102" attributes="0">
               <Component id="menuPanel" min="-2" pref="35" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="principalPanel" pref="283" max="32767" attributes="0"/>
+              <Component id="principalPanel" pref="348" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
