@@ -5,6 +5,7 @@
 package View;
 
 import Entity.Actual_User;
+import Entity.Person;
 
 /**
  *
@@ -18,6 +19,15 @@ public class Principal extends javax.swing.JFrame {
     
     
     private Actual_User actualUser = Actual_User.getInstance();
+    private NewCustomer customer;
+
+    public NewCustomer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(NewCustomer customer) {
+        this.customer = customer;
+    }
     
     public Principal() {
         initComponents();
@@ -52,14 +62,14 @@ public class Principal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(principalPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+            .addComponent(menuPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 442, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(principalPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE))
+                .addComponent(principalPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE))
         );
 
         pack();
@@ -71,7 +81,7 @@ public class Principal extends javax.swing.JFrame {
         principalPanel.removeAll();
         principalPanel.add(new Login());
         principalPanel.setVisible(true);
-         this.bloqMenu();
+        this.bloqMenu();
     }
     
     public void welcome() {
@@ -100,10 +110,37 @@ public class Principal extends javax.swing.JFrame {
         principalPanel.setVisible(true);
     }
     
-    void acreditar() {
+    public void acreditar() {
         principalPanel.setVisible(false);
         principalPanel.removeAll();
         principalPanel.add(new Acreditar());
+        principalPanel.setVisible(true);
+    }
+    
+    public void acreditar(Person user) {
+        principalPanel.setVisible(false);
+        principalPanel.removeAll();
+        principalPanel.add(new AcreditarNew(user));
+        principalPanel.setVisible(true);
+    }
+    
+    public void newCustomer() {
+        principalPanel.setVisible(false);
+        principalPanel.removeAll();
+        principalPanel.add(new NewCustomer());
+        principalPanel.setVisible(true);
+    }
+    
+    public void logout() {
+        actualUser.setNull();
+        actualUser = Actual_User.getInstance();
+        inicialize();
+    }
+    
+    public void newCustomerOld() {
+        principalPanel.setVisible(false);
+        principalPanel.removeAll();
+        principalPanel.add(customer);
         principalPanel.setVisible(true);
     }
     /**
@@ -152,5 +189,5 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel principalPanel;
     // End of variables declaration//GEN-END:variables
 
-    
+        
 }

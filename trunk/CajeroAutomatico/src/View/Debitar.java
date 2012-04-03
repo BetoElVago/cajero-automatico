@@ -37,6 +37,12 @@ public class Debitar extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 255, 255));
         setPreferredSize(new java.awt.Dimension(362, 258));
 
+        montoTF.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                montoTFKeyTyped(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Comic Sans MS", 1, 18)); // NOI18N
         jLabel3.setText("DEBITAR");
 
@@ -71,7 +77,7 @@ public class Debitar extends javax.swing.JPanel {
                                     .addGap(39, 39, 39)
                                     .addComponent(montoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jLabel1)))))
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addContainerGap(87, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -86,13 +92,21 @@ public class Debitar extends javax.swing.JPanel {
                     .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(sendB)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(104, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_sendBActionPerformed
+
+    private void montoTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoTFKeyTyped
+        // TODO add your handling code here:
+        char l = evt.getKeyChar();
+        if(!Character.isDigit(l)){
+            evt.consume();
+        }
+    }//GEN-LAST:event_montoTFKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;

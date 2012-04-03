@@ -15,6 +15,9 @@ public class Menu extends javax.swing.JPanel {
     /**
      * Creates new form Menu
      */
+    
+    Principal principal = Actual_User.getInstance().getPrincipal();
+    
     public Menu() {
         initComponents();
     }
@@ -57,6 +60,11 @@ public class Menu extends javax.swing.JPanel {
         setBackground(new java.awt.Color(0, 0, 0));
 
         logoutB.setText("Salir");
+        logoutB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutBActionPerformed(evt);
+            }
+        });
 
         debitarB.setText("Debitar");
         debitarB.addActionListener(new java.awt.event.ActionListener() {
@@ -101,15 +109,18 @@ public class Menu extends javax.swing.JPanel {
 
     private void debitarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_debitarBActionPerformed
         // TODO add your handling code here:
-        Principal principal = Actual_User.getInstance().getPrincipal();
         principal.debitar();
     }//GEN-LAST:event_debitarBActionPerformed
 
     private void acreditarBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acreditarBActionPerformed
         // TODO add your handling code here:
-        Principal principal = Actual_User.getInstance().getPrincipal();
         principal.acreditar();
     }//GEN-LAST:event_acreditarBActionPerformed
+
+    private void logoutBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutBActionPerformed
+        // TODO add your handling code here:
+        principal.logout();
+    }//GEN-LAST:event_logoutBActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acreditarB;
