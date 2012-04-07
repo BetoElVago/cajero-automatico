@@ -60,7 +60,7 @@ public class PersonControl {
              if (existsUsername(person.getUserName())) {
                 return -3;
             }
-            if (verifyDocumentLength(person.getDocument())) {
+            if (!verifyDocumentLength(person.getDocument())) {
                 return -4;
             }
             return 0;
