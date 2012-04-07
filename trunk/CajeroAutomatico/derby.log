@@ -1,0 +1,10 @@
+----------------------------------------------------------------
+Sat Apr 07 15:44:05 COT 2012:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.8.1.2 - (1095077): instance a816c00e-0136-8e8c-ad1f-000003a97500 
+on database directory C:\Users\LENOVO\Documents\NetBeansProjects\CajeroAutomatico\DB\cajero  with class loader sun.misc.Launcher$AppClassLoader@138d107f 
+Loaded from file:/C:/Users/LENOVO/Documents/NetBeansProjects/CajeroAutomatico/lib/derby.jar
+java.vendor=Sun Microsystems Inc.
+java.runtime.version=1.6.0_26-b03
+user.dir=C:\Users\LENOVO\Documents\NetBeansProjects\CajeroAutomatico
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
