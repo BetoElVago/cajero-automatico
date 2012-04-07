@@ -12,11 +12,12 @@ import java.util.List;
  * @author Edison Parra
  */
 public class Actual_User {
-    
     private static Actual_User instance;
     private String username;
     private Principal principal;
     private long id;
+    private double balance;
+    private double balanceOnChange;
     
 
     public Principal getPrincipal() {
@@ -36,10 +37,10 @@ public class Actual_User {
 	return instance;
     }
 
-    public void setInstance(String un, long id){
+    public void setInstance(String n, String un, long id, double balance){
         instance.username = un;
         instance.id = id;
-        
+        instance.balance = balance;
     }
 
     public void setNull(){
@@ -60,5 +61,22 @@ public class Actual_User {
 
     public void setUsername(String username) {
         this.username = username;
-    }    
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getBalanceOnChange() {
+        return balanceOnChange;
+    }
+
+    public void setBalanceOnChange(double balanceOnChange) {
+        this.balanceOnChange = balanceOnChange;
+    }
+
 }
