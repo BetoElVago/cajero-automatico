@@ -59,7 +59,8 @@ public class TransactionControl {
 
             em.getTransaction().begin();
 
-            Person person = UserToPerson();
+            Person person = personDao.searchByUsername(user.getUsername(), em).get(0);
+            person.setBalance(user.getBalance());
             personDao.updatePass(person, em);
             em.getTransaction().commit();
             return 0;
@@ -82,6 +83,7 @@ public class TransactionControl {
 
         Numero balance = new Numero();
         balance.setValor(user.getBalance());
+        System.out.println(balance.getValor());
         
         Numero retirment = new Numero();
         retirment.setValor(amount);
@@ -99,7 +101,10 @@ public class TransactionControl {
         EntityManager em = emf.createEntityManager();
         try{
             em.getTransaction().begin();
-            Person person = UserToPerson();
+            
+            Person person = personDao.searchByUsername(user.getUsername(), em).get(0);
+            person.setBalance(user.getBalance());
+            
             personDao.updatePass(person, em);
             em.getTransaction().commit();
             return 0;
@@ -110,14 +115,7 @@ public class TransactionControl {
         }       
     }
 
-    private Person UserToPerson() {
-        Person person = new Person();
-        Actual_User user = Actual_User.getInstance();
-
-        person.setId(user.getId());
-        person.setBalance(user.getBalance());
-        return person;
-    }
+    
 
     private boolean validateConsignment(double amount) {
         if (amount % 10000 != 0 || amount > 1000000 || amount < 0) {
