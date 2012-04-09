@@ -40,10 +40,10 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="fiftyB" min="-2" max="-2" attributes="0"/>
                                   <Component id="tenB" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Group type="102" attributes="0">
                                           <Component id="twnetyB" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                          <EmptySpace max="32767" attributes="0"/>
                                           <Component id="sendB" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <Component id="montoTF" min="-2" pref="170" max="-2" attributes="0"/>
@@ -78,7 +78,7 @@
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="fiftyB" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="53" max="32767" attributes="0"/>
+              <EmptySpace pref="17" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

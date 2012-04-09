@@ -4,7 +4,9 @@
  */
 package View;
 
+import Control.TransactionControl;
 import Entity.Actual_User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,8 +17,11 @@ public class Debitar extends javax.swing.JPanel {
     /**
      * Creates new form Login
      */
+    private TransactionControl control;
+    
     public Debitar() {
         initComponents();
+        control = new TransactionControl();
     }
 
     /**
@@ -97,7 +102,30 @@ public class Debitar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        // TODO add your handling code here:
+        try{
+            double amount = new Double(montoTF.getText());
+            int  result = control.retirement();
+            Actual_User.getInstance().setBalanceOnChange(amount);
+            if(result == 0){
+                JOptionPane.showMessageDialog(this, "El retiro ha sido exitoso",
+                        "transacción existosa",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else if(result == -1){
+               JOptionPane.showMessageDialog(this, "El monto a retirar debe ser mínimo de $10000 y máximo de $400000",
+                       "Error en la transacción",JOptionPane.WARNING_MESSAGE); 
+            }
+            else if(result == -2){
+                JOptionPane.showMessageDialog(this, "No hay saldo suficiente",
+                        "Error la transacción",JOptionPane.WARNING_MESSAGE);
+            }
+            else if(result == -3){
+               JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+            }
+        }catch(Exception ex){
+           JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_sendBActionPerformed
 
     private void montoTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoTFKeyTyped
