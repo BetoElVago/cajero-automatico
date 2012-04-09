@@ -4,9 +4,11 @@
  */
 package View;
 
+import Control.TransactionControl;
 import Controlador.Operacion;
 import Entity.Actual_User;
 import Modelo.Numero;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -14,11 +16,13 @@ import Modelo.Numero;
  */
 public class Acreditar extends javax.swing.JPanel {
 
+    private TransactionControl control;
     /**
      * Creates new form Login
      */
     public Acreditar() {
         initComponents();
+        control = new TransactionControl();
     }
 
     /**
@@ -101,10 +105,10 @@ public class Acreditar extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(fiftyB)
                                     .addComponent(tenB)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addGroup(layout.createSequentialGroup()
                                             .addComponent(twnetyB)
-                                            .addGap(44, 44, 44)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(sendB))
                                         .addComponent(montoTF, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -128,7 +132,7 @@ public class Acreditar extends javax.swing.JPanel {
                     .addComponent(sendB))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(fiftyB)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -169,7 +173,27 @@ public class Acreditar extends javax.swing.JPanel {
     }//GEN-LAST:event_fiftyBActionPerformed
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        // TODO add your handling code here:
+       try{
+           double amount = new Double(montoTF.getText());
+           Actual_User.getInstance().setBalanceOnChange(amount);
+           int result = control.Consignment();
+           if(result == 0){
+               JOptionPane.showMessageDialog(this, "Consgnación exitosa",
+                       "Trasancción exitosa",JOptionPane.INFORMATION_MESSAGE);
+           }
+           else if(result == -1){
+               JOptionPane.showMessageDialog(this, "El monto a consignar debe ser de por lo menos $10000."
+                       + " Sólo se acpetan billetes","Error en la transacción",JOptionPane.WARNING_MESSAGE);
+           }
+           else if(result == -2){
+               JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+           }
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+       }
+       
     }//GEN-LAST:event_sendBActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
