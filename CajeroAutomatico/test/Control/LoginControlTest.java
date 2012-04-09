@@ -45,7 +45,7 @@ public class LoginControlTest {
     @Test
     public void testLogin() throws Exception {
         boolean expResult = true;
-        assertEquals(expResult, login.login("admin", "admin"));
+        assertEquals(expResult, login.login("admin", "adminadmin"));
         assertEquals(!expResult, login.login("admin", "Otracosa1"));
         assertEquals(!expResult, login.login("otracosa", "admin"));
         assertEquals(!expResult, login.login("otracosa", "Otracosa1"));
