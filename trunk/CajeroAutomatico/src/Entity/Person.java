@@ -20,10 +20,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Person.findById", query = "SELECT p FROM Person p WHERE p.id = :id"),
     @NamedQuery(name = "Person.findByDocument", query = "SELECT p FROM Person p WHERE p.document = :document"),
     @NamedQuery(name = "Person.findByName", query = "SELECT p FROM Person p WHERE p.name = :name"),
+    @NamedQuery(name = "Person.findByLastName", query = "SELECT p FROM Person p WHERE p.lastName = :lastName"),
     @NamedQuery(name = "Person.findByPassword", query = "SELECT p FROM Person p WHERE p.password = :password"),
     @NamedQuery(name = "Person.findByUserName", query = "SELECT p FROM Person p WHERE p.userName = :userName"),
-    @NamedQuery(name = "Person.findByBalance", query = "SELECT p FROM Person p WHERE p.balance = :balance"),
-    @NamedQuery(name = "Person.findByBalanceOnChange", query = "SELECT p FROM Person p WHERE p.balanceOnChange = :balanceOnChange")})
+    @NamedQuery(name = "Person.findByBalance", query = "SELECT p FROM Person p WHERE p.balance = :balance")})
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,6 +37,9 @@ public class Person implements Serializable {
     @Column(name = "NAME")
     private String name;
     @Basic(optional = false)
+    @Column(name = "LAST_NAME")
+    private String lastName;
+    @Basic(optional = false)
     @Column(name = "PASSWORD")
     private String password;
     @Basic(optional = false)
@@ -45,9 +48,6 @@ public class Person implements Serializable {
     @Basic(optional = false)
     @Column(name = "BALANCE")
     private double balance;
-    @Basic(optional = false)
-    @Column(name = "BALANCE_ON_CHANGE")
-    private double balanceOnChange;
 
     public Person() {
     }
@@ -56,13 +56,13 @@ public class Person implements Serializable {
         this.id = id;
     }
 
-    public Person(Long id, String name, String password, String userName, double balance, double balanceOnChange) {
+    public Person(Long id, String name, String lastName, String password, String userName, double balance) {
         this.id = id;
         this.name = name;
+        this.lastName = lastName;
         this.password = password;
         this.userName = userName;
         this.balance = balance;
-        this.balanceOnChange = balanceOnChange;
     }
 
     public Long getId() {
@@ -89,6 +89,14 @@ public class Person implements Serializable {
         this.name = name;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public String getPassword() {
         return password;
     }
@@ -111,14 +119,6 @@ public class Person implements Serializable {
 
     public void setBalance(double balance) {
         this.balance = balance;
-    }
-
-    public double getBalanceOnChange() {
-        return balanceOnChange;
-    }
-
-    public void setBalanceOnChange(double balanceOnChange) {
-        this.balanceOnChange = balanceOnChange;
     }
 
     @Override

@@ -116,7 +116,6 @@ public class TransactionControl {
 
         person.setId(user.getId());
         person.setBalance(user.getBalance());
-        person.setBalanceOnChange(user.getBalanceOnChange());
         return person;
     }
 
