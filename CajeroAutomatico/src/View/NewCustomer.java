@@ -4,8 +4,10 @@
  */
 package View;
 
+import Control.PersonControl;
 import Entity.Actual_User;
 import Entity.Person;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,6 +19,7 @@ public class NewCustomer extends javax.swing.JPanel {
      * Creates new form NewCustomer
      */
     Principal principal = Actual_User.getInstance().getPrincipal();
+    PersonControl pc = new PersonControl();
     
     public NewCustomer() {
         initComponents();
@@ -65,17 +68,11 @@ public class NewCustomer extends javax.swing.JPanel {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordTFKeyPressed(evt);
             }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordTFKeyTyped(evt);
-            }
         });
 
         repasswordTF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 repasswordTFKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                repasswordTFKeyTyped(evt);
             }
         });
 
@@ -88,6 +85,9 @@ public class NewCustomer extends javax.swing.JPanel {
         documentTF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 documentTFKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                documentTFKeyTyped(evt);
             }
         });
 
@@ -195,26 +195,51 @@ public class NewCustomer extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void returnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBActionPerformed
-        // TODO add your handling code here:
         principal.logout();
     }//GEN-LAST:event_returnBActionPerformed
 
     private void newBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBActionPerformed
-        // TODO add your handling code here:
         String name = nameTF.getText();
         String document =  documentTF.getText();
         String lastName = lastNameTF.getText();
         String username = usernameTF.getText();
         String password = String.valueOf(passwordTF.getPassword());
         String repassword = String.valueOf(repasswordTF.getPassword());
+        if(!password.equals(repassword)){
+            JOptionPane.showMessageDialog(this, "las contraseñas no coinciden", "Advertencia",JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         Person user = new Person();
-        user.setName(name+""+lastName);
+        user.setName(name);
+        user.setLastName(lastName);
         user.setDocument(document);
         user.setUserName(username);
         user.setPassword(password);
-        principal.setCustomer(this);
-        principal.acreditar(user);
+        int res = pc.createUser(user);
         
+        if(res == 0){               
+            nameTF.setText("");
+            passwordTF.setText("");
+            repasswordTF.setText("");
+            documentTF.setText("");
+            JOptionPane.showMessageDialog(this, "El usuario ha sido creado correctamente");
+            principal.setCustomer(this);
+            principal.acreditar(user);
+        
+        }
+        else if(res == -1){
+            JOptionPane.showMessageDialog(this,"El nombre de usuario debe tener entre 5 y 20 caracteres" , "Advertencia",JOptionPane.WARNING_MESSAGE);
+            
+        }
+        else if(res == -2){
+            JOptionPane.showMessageDialog(this,"La contraseña debe tener entre 5 y 30 caracteres" , "Advertencia",JOptionPane.WARNING_MESSAGE);
+        }        
+        else if(res == -3){
+            JOptionPane.showMessageDialog(this,"El nombre de usuario ya existe" , "Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
+        else if(res == -4){
+            JOptionPane.showMessageDialog(this,"El documento debe tener entre 7 y 12 caracteres" , "Advertencia",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_newBActionPerformed
 
     private void nameTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nameTFKeyPressed
@@ -246,34 +271,23 @@ public class NewCustomer extends javax.swing.JPanel {
     }//GEN-LAST:event_usernameTFKeyPressed
 
     private void passwordTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTFKeyPressed
-        // TODO add your handling code here:
         if (evt.getKeyChar() == '\n') {
             repasswordTF.requestFocus();
         }
     }//GEN-LAST:event_passwordTFKeyPressed
 
-    private void passwordTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTFKeyTyped
-        // TODO add your handling code here:
-        char l = evt.getKeyChar();
-        if(!Character.isDigit(l)){
-            evt.consume();
-        }
-    }//GEN-LAST:event_passwordTFKeyTyped
-
     private void repasswordTFKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_repasswordTFKeyPressed
-        // TODO add your handling code here:
         if (evt.getKeyChar() == '\n') {
             this.newBActionPerformed(null);
         }
     }//GEN-LAST:event_repasswordTFKeyPressed
 
-    private void repasswordTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_repasswordTFKeyTyped
-        // TODO add your handling code here:
+    private void documentTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_documentTFKeyTyped
         char l = evt.getKeyChar();
         if(!Character.isDigit(l)){
             evt.consume();
-        }
-    }//GEN-LAST:event_repasswordTFKeyTyped
+        } 
+    }//GEN-LAST:event_documentTFKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField documentTF;

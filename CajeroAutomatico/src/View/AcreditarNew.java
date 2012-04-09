@@ -4,6 +4,7 @@
  */
 package View;
 
+import Control.TransactionControl;
 import Controlador.Operacion;
 import Entity.Actual_User;
 import Entity.Person;
@@ -14,6 +15,8 @@ import Modelo.Numero;
  * @author David
  */
 public class AcreditarNew extends javax.swing.JPanel {
+    
+    TransactionControl tc = new TransactionControl();
 
     /**
      * Creates new form Login
@@ -151,7 +154,6 @@ public class AcreditarNew extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tenBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenBActionPerformed
-        // TODO add your handling code here:
         sendB.setEnabled(true);
         Numero num1 = new Numero();
         Numero num2 = new Numero();
@@ -163,7 +165,6 @@ public class AcreditarNew extends javax.swing.JPanel {
     }//GEN-LAST:event_tenBActionPerformed
 
     private void twnetyBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_twnetyBActionPerformed
-        // TODO add your handling code here:
         sendB.setEnabled(true);
         Numero num1 = new Numero();
         Numero num2 = new Numero();
@@ -175,7 +176,6 @@ public class AcreditarNew extends javax.swing.JPanel {
     }//GEN-LAST:event_twnetyBActionPerformed
 
     private void fiftyBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fiftyBActionPerformed
-        // TODO add your handling code here:
         sendB.setEnabled(true);
         Numero num1 = new Numero();
         Numero num2 = new Numero();
@@ -187,12 +187,10 @@ public class AcreditarNew extends javax.swing.JPanel {
     }//GEN-LAST:event_fiftyBActionPerformed
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        // TODO add your handling code here:
-        
+        int monto = Integer.parseInt(montoTF.getText());
     }//GEN-LAST:event_sendBActionPerformed
 
     private void returnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBActionPerformed
-        // TODO add your handling code here:
         principal.newCustomerOld();
     }//GEN-LAST:event_returnBActionPerformed
 

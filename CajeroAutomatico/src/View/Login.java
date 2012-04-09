@@ -4,7 +4,9 @@
  */
 package View;
 
+import Control.LoginControl;
 import Entity.Actual_User;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +17,7 @@ public class Login extends javax.swing.JPanel {
     /**
      * Creates new form Login
      */
-    
+    private LoginControl lc = new LoginControl();
     Principal principal = Actual_User.getInstance().getPrincipal();
     
     public Login() {
@@ -55,9 +57,6 @@ public class Login extends javax.swing.JPanel {
         passwordTF.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passwordTFKeyPressed(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                passwordTFKeyTyped(evt);
             }
         });
 
@@ -99,7 +98,7 @@ public class Login extends javax.swing.JPanel {
                             .addComponent(jLabel2)
                             .addGap(64, 64, 64)
                             .addComponent(passwordTF, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -118,19 +117,23 @@ public class Login extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(sendB)
                     .addComponent(newCustomerB))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addContainerGap(58, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        // TODO add your handling code here:
         String username = userNameTF.getText();
         String password = String.valueOf(passwordTF.getPassword());
         try{
-            principal.welcome();
-        
+            boolean res = lc.login(username, password);
+            if(res){
+                principal.welcome();
+            }
+            else{
+                JOptionPane.showMessageDialog(this, "usuario o contraseña incorrecta", "Advertencia",JOptionPane.WARNING_MESSAGE);
+            }
         }catch(Exception e){
-        
+            JOptionPane.showMessageDialog(this, "Ha ocurrido un error", "Advertencia",JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_sendBActionPerformed
@@ -153,14 +156,6 @@ public class Login extends javax.swing.JPanel {
             this.sendBActionPerformed(null);
         }
     }//GEN-LAST:event_passwordTFKeyPressed
-
-    private void passwordTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passwordTFKeyTyped
-        // TODO add your handling code here:
-        char l = evt.getKeyChar();
-        if(!Character.isDigit(l)){
-            evt.consume();
-        }
-    }//GEN-LAST:event_passwordTFKeyTyped
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
