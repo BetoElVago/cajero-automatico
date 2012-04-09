@@ -42,7 +42,8 @@ public class PersonControlTest {
          Person person = new Person();
         
          //Normal Flow
-        person.setName("Usuario Prueba");
+        person.setName("Usuario");
+        person.setLastName("Prueba");
         person.setUserName("usuario01");
         person.setDocument("1234567");
         person.setPassword("usuario01");
