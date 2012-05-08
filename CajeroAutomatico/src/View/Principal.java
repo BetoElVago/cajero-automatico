@@ -124,6 +124,13 @@ public class Principal extends javax.swing.JFrame {
         principalPanel.setVisible(true);
     }
     
+    public void saldo() {
+        principalPanel.setVisible(false);
+        principalPanel.removeAll();
+        principalPanel.add(new Saldo());
+        principalPanel.setVisible(true);
+    }
+    
     public void newCustomer() {
         principalPanel.setVisible(false);
         principalPanel.removeAll();

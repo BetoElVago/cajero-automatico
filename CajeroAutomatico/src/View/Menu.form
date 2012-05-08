@@ -61,7 +61,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="acreditarB" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+              <Component id="saldoB" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="36" max="32767" attributes="0"/>
               <Component id="logoutB" min="-2" max="-2" attributes="0"/>
           </Group>
@@ -75,7 +75,7 @@
                   <Component id="logoutB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="debitarB" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="acreditarB" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="saldoB" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -106,10 +106,13 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="acreditarBActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton4">
+    <Component class="javax.swing.JButton" name="saldoB">
       <Properties>
         <Property name="text" type="java.lang.String" value="Saldo"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saldoBActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

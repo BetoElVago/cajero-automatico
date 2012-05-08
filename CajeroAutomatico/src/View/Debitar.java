@@ -18,7 +18,7 @@ public class Debitar extends javax.swing.JPanel {
      * Creates new form Login
      */
     private TransactionControl control;
-    
+
     public Debitar() {
         initComponents();
         control = new TransactionControl();
@@ -102,40 +102,43 @@ public class Debitar extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        try{
-            double amount = new Double(montoTF.getText());
-            int  result = control.retirement();
-            Actual_User.getInstance().setBalanceOnChange(amount);
-            if(result == 0){
-                JOptionPane.showMessageDialog(this, "El retiro ha sido exitoso",
-                        "transacción existosa",JOptionPane.INFORMATION_MESSAGE);
+
+        if (montoTF.getText().length() == 0) {
+            JOptionPane.showMessageDialog(this, "El monto a retirar debe ser mínimo de $10000 y máximo de $400000",
+                    "Error", JOptionPane.WARNING_MESSAGE);
+        } else {
+
+            try {
+                double amount = new Double(montoTF.getText());
+                Actual_User.getInstance().setBalanceOnChange(amount);
+                int result = control.retirement();
+                double balance = Actual_User.getInstance().getBalance();
+                if (result == 0) {
+                    JOptionPane.showMessageDialog(this, "El retiro ha sido exitoso. Su nuevo saldo es: " + balance,
+                            "transacción existosa", JOptionPane.INFORMATION_MESSAGE);
+                    montoTF.setText("");
+                } else if (result == -1) {
+                    JOptionPane.showMessageDialog(this, "El monto a retirar debe ser mínimo de $10000 y máximo de $400000",
+                            "Error en la transacción", JOptionPane.WARNING_MESSAGE);
+                } else if (result == -2) {
+                    JOptionPane.showMessageDialog(this, "No hay saldo suficiente",
+                            "Error la transacción", JOptionPane.WARNING_MESSAGE);
+                } else if (result == -3) {
+                    JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción", "Error en la transacicióñ", JOptionPane.ERROR_MESSAGE);
+                }
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción", "Error en la transacicióñ", JOptionPane.ERROR_MESSAGE);
             }
-            else if(result == -1){
-               JOptionPane.showMessageDialog(this, "El monto a retirar debe ser mínimo de $10000 y máximo de $400000",
-                       "Error en la transacción",JOptionPane.WARNING_MESSAGE); 
-            }
-            else if(result == -2){
-                JOptionPane.showMessageDialog(this, "No hay saldo suficiente",
-                        "Error la transacción",JOptionPane.WARNING_MESSAGE);
-            }
-            else if(result == -3){
-               JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
-                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
-            }
-        }catch(Exception ex){
-           JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
-                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_sendBActionPerformed
 
     private void montoTFKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_montoTFKeyTyped
         // TODO add your handling code here:
         char l = evt.getKeyChar();
-        if(!Character.isDigit(l)){
+        if (!Character.isDigit(l)) {
             evt.consume();
         }
     }//GEN-LAST:event_montoTFKeyTyped
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
