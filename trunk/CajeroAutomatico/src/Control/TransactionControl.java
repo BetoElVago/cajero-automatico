@@ -32,8 +32,7 @@ public class TransactionControl {
         Actual_User user = Actual_User.getInstance();
         double amount = user.getBalanceOnChange();
         /**
-         * El monto dado no está entre los límites dados 
-         * en la lógica de negocio
+         * El monto dado no está entre los límites dados en la lógica de negocio
          */
         if (!validateConsignment(amount)) {
             return -1;
@@ -41,24 +40,20 @@ public class TransactionControl {
 
         Numero balance = new Numero();
         balance.setValor(user.getBalance());
-        System.out.println(balance.getValor());
 
         Numero consign = new Numero();
         consign.setValor(amount);
-        
+
 
         double nextAmount = operation.sumar(balance, consign).getValor();
-        
-        user.setBalanceOnChange(nextAmount);
-        
-        user.getBalanceOnChange();
+
+        user.setBalance(nextAmount);
 
         EntityManager em = emf.createEntityManager();
 
         try {
 
             em.getTransaction().begin();
-
             Person person = personDao.searchByUsername(user.getUsername(), em).get(0);
             person.setBalance(user.getBalance());
             personDao.updatePass(person, em);
@@ -83,39 +78,36 @@ public class TransactionControl {
 
         Numero balance = new Numero();
         balance.setValor(user.getBalance());
-        System.out.println(balance.getValor());
-        
+
         Numero retirment = new Numero();
         retirment.setValor(amount);
-        
-        double nextBalance = operation.restar(balance,retirment).getValor();
+
+        double nextBalance = operation.restar(balance, retirment).getValor();
         /**
-         * La cantidad que se quiere retirar es mayor que 
-         * la cantidad que el cliente posee en su cuenta.
+         * La cantidad que se quiere retirar es mayor que la cantidad que el
+         * cliente posee en su cuenta.
          */
-        if(nextBalance < 0){
+        if (nextBalance < 0) {
             return -2;
         }
         user.setBalance(nextBalance);
         user.setBalanceOnChange(0);
         EntityManager em = emf.createEntityManager();
-        try{
+        try {
             em.getTransaction().begin();
-            
+
             Person person = personDao.searchByUsername(user.getUsername(), em).get(0);
             person.setBalance(user.getBalance());
-            
+
             personDao.updatePass(person, em);
             em.getTransaction().commit();
             return 0;
-        }catch(Exception ex){
+        } catch (Exception ex) {
             return -3;
-        }finally{
+        } finally {
             em.close();
-        }       
+        }
     }
-
-    
 
     private boolean validateConsignment(double amount) {
         if (amount % 10000 != 0 || amount > 1000000 || amount < 0) {
@@ -129,5 +121,42 @@ public class TransactionControl {
             return false;
         }
         return true;
+    }
+
+    public int Consignment(Person user, Double amount) {
+        /**
+         * El monto dado no está entre los límites dados en la lógica de negocio
+         */
+        if (!validateConsignment(amount)) {
+            return -1;
+        }
+
+        Numero balance = new Numero();
+        balance.setValor(user.getBalance());
+
+        Numero consign = new Numero();
+        consign.setValor(amount);
+        
+        EntityManager em = emf.createEntityManager();
+
+        try {
+
+            em.getTransaction().begin();
+            Person person = personDao.searchByUsername(user.getUserName(), em).get(0);
+            person.setBalance(user.getBalance());
+            personDao.updatePass(person, em);
+            em.getTransaction().commit();
+            return 0;
+        } catch (Exception e) {
+            return -2;
+        } finally {
+            em.close();
+        }
+    }
+
+    public double getBalance(String username) {
+        EntityManager em = emf.createEntityManager();
+        Person user = personDao.searchByUsername(username, em).get(0);
+        return user.getBalance();
     }
 }

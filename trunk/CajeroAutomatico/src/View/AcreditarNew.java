@@ -9,6 +9,7 @@ import Controlador.Operacion;
 import Entity.Actual_User;
 import Entity.Person;
 import Modelo.Numero;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -28,6 +29,7 @@ public class AcreditarNew extends javax.swing.JPanel {
     public AcreditarNew(Person user) {
         initComponents();
         this.user = user;
+        getBalance();
     }
 
     /**
@@ -187,7 +189,27 @@ public class AcreditarNew extends javax.swing.JPanel {
     }//GEN-LAST:event_fiftyBActionPerformed
 
     private void sendBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendBActionPerformed
-        int monto = Integer.parseInt(montoTF.getText());
+        try{
+           double amount = new Double(montoTF.getText());
+           Actual_User.getInstance().setBalanceOnChange(amount);
+           int result = tc.Consignment(user, amount);
+           if(result == 0){
+               JOptionPane.showMessageDialog(this, "Consignación exitosa",
+                       "Trasancción exitosa",JOptionPane.INFORMATION_MESSAGE);
+               principal.logout();
+           }
+           else if(result == -1){
+               JOptionPane.showMessageDialog(this, "El monto a consignar debe ser de por lo menos $10000."
+                       + " Sólo se acpetan billetes","Error en la transacción",JOptionPane.WARNING_MESSAGE);
+           }
+           else if(result == -2){
+               JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacción",JOptionPane.ERROR_MESSAGE);
+           }
+       }catch(Exception ex){
+           JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
+                       ,"Error en la transacció",JOptionPane.ERROR_MESSAGE);
+       }
     }//GEN-LAST:event_sendBActionPerformed
 
     private void returnBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_returnBActionPerformed
@@ -205,4 +227,8 @@ public class AcreditarNew extends javax.swing.JPanel {
     private javax.swing.JButton tenB;
     private javax.swing.JButton twnetyB;
     // End of variables declaration//GEN-END:variables
+
+    private void getBalance() {
+        
+    }
 }

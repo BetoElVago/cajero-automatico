@@ -178,8 +178,10 @@ public class Acreditar extends javax.swing.JPanel {
            Actual_User.getInstance().setBalanceOnChange(amount);
            int result = control.Consignment();
            if(result == 0){
-               JOptionPane.showMessageDialog(this, "Consgnación exitosa",
-                       "Trasancción exitosa",JOptionPane.INFORMATION_MESSAGE);
+               double balance = Actual_User.getInstance().getBalance();
+               JOptionPane.showMessageDialog(this, "Consignación exitosa. Su nuevo saldo es: " + balance,
+                       "Trasancción exitosa" ,JOptionPane.INFORMATION_MESSAGE);
+               montoTF.setText("0");
            }
            else if(result == -1){
                JOptionPane.showMessageDialog(this, "El monto a consignar debe ser de por lo menos $10000."
@@ -187,11 +189,11 @@ public class Acreditar extends javax.swing.JPanel {
            }
            else if(result == -2){
                JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
-                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+                       ,"Error en la transacción",JOptionPane.ERROR_MESSAGE);
            }
        }catch(Exception ex){
            JOptionPane.showMessageDialog(this, "Ha ocurrido un error inesperado mientra se hacía la transacción"
-                       ,"Error en la transacicióñ",JOptionPane.ERROR_MESSAGE);
+                       ,"Error en la transacció",JOptionPane.ERROR_MESSAGE);
        }
        
     }//GEN-LAST:event_sendBActionPerformed

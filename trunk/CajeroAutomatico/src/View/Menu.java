@@ -38,7 +38,7 @@ public class Menu extends javax.swing.JPanel {
         logoutB = new javax.swing.JButton();
         debitarB = new javax.swing.JButton();
         acreditarB = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        saldoB = new javax.swing.JButton();
 
         jButton3.setText("Sali");
 
@@ -80,7 +80,12 @@ public class Menu extends javax.swing.JPanel {
             }
         });
 
-        jButton4.setText("Saldo");
+        saldoB.setText("Saldo");
+        saldoB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saldoBActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -91,7 +96,7 @@ public class Menu extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(acreditarB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(saldoB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(logoutB))
         );
@@ -103,7 +108,7 @@ public class Menu extends javax.swing.JPanel {
                     .addComponent(logoutB)
                     .addComponent(debitarB)
                     .addComponent(acreditarB)
-                    .addComponent(jButton4)))
+                    .addComponent(saldoB)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -122,14 +127,19 @@ public class Menu extends javax.swing.JPanel {
         principal.logout();
     }//GEN-LAST:event_logoutBActionPerformed
 
+    private void saldoBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saldoBActionPerformed
+        // TODO add your handling code here:
+        principal.saldo();
+    }//GEN-LAST:event_saldoBActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acreditarB;
     private javax.swing.JButton debitarB;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JToolBar jToolBar1;
     private javax.swing.JButton logoutB;
+    private javax.swing.JButton saldoB;
     // End of variables declaration//GEN-END:variables
 }
